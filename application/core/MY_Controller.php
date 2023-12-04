@@ -20,7 +20,7 @@ class MY_Controller extends CI_Controller
      * Load view with default layouts
      */     
      public function view($data){
-          $this->load->view('layout/app', $data);
+          $this->load->view('layouts/app', $data);
      }
 
      

@@ -4,8 +4,10 @@
           <div class="col-md-10 mx-auto">
                <div class="card">
                     <div class="card-header">
-                         <span>Kategori</span>
-                         <a href="/admin-category-form.html" class="btn btn-sm btn-secondary">Tambah</a>
+                         <span> Kategori </span>
+                         <a href="<?= base_url('/index.php/category/create') ?>" class="btn btn-sm btn-secondary">
+                              Tambah </a>
+
                          <div class="float-end">
                               <form action="#">
                                    <div class="input-group">
@@ -48,14 +50,12 @@
                                                   <?= $row->slug ?>
                                              </td>
                                              <td>
-                                                  <form action="#">
-                                                       <a href="#" class="">
-                                                            <button class="btn btn-sm">
-                                                                 <i class="fas fa-edit text-info"></i></button></a>
-                                                       <button class="btn btn-sm" type="submit">
-                                                            <i class="fas fa-trash text-danger"></i>
-                                                       </button>
-                                                  </form>
+                                                  <a href="<?= base_url("/index.php/category/edit/$row->id") ?>" class="">
+                                                       <button class="btn btn-sm">
+                                                            <i class="fas fa-edit text-info"></i></button></a>
+                                                  <button class="btn btn-sm" type="submit">
+                                                       <i class="fas fa-trash text-danger"></i>
+                                                  </button>
                                              </td>
                                         </tr>
                                    <?php endforeach ?>

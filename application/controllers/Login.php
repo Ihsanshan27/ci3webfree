@@ -2,13 +2,16 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Register extends MY_Controller {
+class Login extends MY_Controller {
+
 
      public function __construct() {
           parent::__construct();
+          //Do your magic here
           $is_login = $this->session->userdata('is_login');
 
           if($is_login) {
+               # code...
                redirect(base_url());
                return;
           }
@@ -16,27 +19,33 @@ class Register extends MY_Controller {
 
      public function index() {
           if(!$_POST) {
-               $input = (object)$this->register->getDefaultValues();
+               $input = (object)$this->login->getDefaultValues();
           } else {
                $input = (object)$this->input->post(null, true);
           }
 
-          if(!$this->register->validate()) {
-               $data['title'] = 'Register';
+          if(!$this->login->validate()) {
+               # code...
+               $data['title'] = 'login';
                $data['input'] = $input;
-               $data['page'] = 'pages/auth/register';
+               $data['page'] = 'pages/auth/login';
+
                $this->view($data);
                return;
           }
 
-          if($this->register->run($input)) {
-               $this->session->set_flashdata('success', 'Berhasil melakukan registrasi!');
+          if($this->login->run($input)) {
+               $this->session->set_flashdata('success', 'Berhasil melakukan login!');
                redirect(base_url());
           } else {
-               $this->session->set_flashdata('error', 'Oops! Terjadi suatu kesalahan!');
-               redirect(base_url('/register'));
+               $this->session->set_flashdata('error', 'Email atau password anda salah!');
+               redirect(base_url('/login'));
           }
      }
 
 
 }
+
+/* End of Login.php */
+
+?>

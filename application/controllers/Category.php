@@ -84,6 +84,24 @@ class Category extends MY_Controller {
           redirect(base_url('/index.php/category'));
      }
 
+     public function delete($id) {
+          if(!$_POST) {
+               redirect(base_url('category'));
+          }
+
+          if(!$this->category->where('id', $id)->first()) {
+               $this->session->set_flashdata('warning', 'Maaf! Data tidak ditemukan.');
+               redirect(base_url('category'));
+          }
+
+          if($this->category->where('id', $id)->delete()) {
+               $this->session->set_flashdata('success', 'Data sudah berhasil dihapus!');
+          } else {
+               $this->session->set_flashdata('error', 'Oops! Terjadi suatu kesalahan.');
+          }
+          redirect(base_url('/index.php/category'));
+     }
+
      public function unique_slug() {
           $slug = $this->input->post('slug');
           $id = $this->input->post('id');

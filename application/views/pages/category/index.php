@@ -50,12 +50,18 @@
                                                   <?= $row->slug ?>
                                              </td>
                                              <td>
+                                                  <?= form_open("/index.php/category/delete/$row->id", ['method' => 'POST']) ?>
+                                                  <?= form_hidden('id', $row->id) ?>
                                                   <a href="<?= base_url("/index.php/category/edit/$row->id") ?>" class="">
                                                        <button class="btn btn-sm">
                                                             <i class="fas fa-edit text-info"></i></button></a>
-                                                  <button class="btn btn-sm" type="submit">
+                                                  <button class="btn btn-sm" type="submit"
+                                                       onclick="return confirm('Apakah yakin ingin menghapus?')">
                                                        <i class="fas fa-trash text-danger"></i>
                                                   </button>
+                                                  <?=
+                                                       form_close()
+                                                       ?>
                                              </td>
                                         </tr>
                                    <?php endforeach ?>

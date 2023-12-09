@@ -1,12 +1,11 @@
 <?php
 
-
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Product_model extends MY_Model
 {
 
-     // protected $perPage = 5;
+     protected $perPage = 5;
 
      public function getDefaultValues()
      {
@@ -20,6 +19,7 @@ class Product_model extends MY_Model
                'image'        => ''
           ];
      }
+
      public function getValidationRules()
      {
           $validationRules = [
@@ -43,16 +43,11 @@ class Product_model extends MY_Model
                     'label' => 'Deskripsi',
                     'rules' => 'trim|required'
                ],
-               [
-                    'field' => 'price',
-                    'label' => 'Harga',
-                    'rules' => 'trim|required|numeric'
-               ],
-               [
-                    'field' => 'is_available',
-                    'label' => 'Ketersediaan',
-                    'rules' => 'required'
-               ],
+               // [
+               //      'field' => 'is_available',
+               //      'label' => 'Ketersediaan',
+               //      'rules' => 'required'
+               // ],
           ];
 
           return $validationRules;
@@ -80,15 +75,14 @@ class Product_model extends MY_Model
                return false;
           }
      }
+
      public function deleteImage($fileName)
      {
-          if (file_exists("./index.php/images/product/$fileName")) {
-               unlink("./index.php/images/product/$fileName");
+          if (file_exists("./images/product/$fileName")) {
+               unlink("./images/product/$fileName");
           }
      }
+
 }
 
 /* End of file Product_model.php */
-
-
-?>

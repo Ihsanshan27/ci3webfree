@@ -8,15 +8,17 @@
                          <a href="<?= base_url('/index.php/product/create') ?>"
                               class="btn btn-sm btn-secondary">Tambah</a>
                          <div class="float-end">
-                              <form action="#">
+                              <form action="<?= base_url("index.php/product/search") ?>" method="POST">
                                    <div class="input-group">
-                                        <input type="text" class="form-control form-control-sm text-center"
-                                             placeholder="Cari" />
+                                        <input type="text" name="keyword"
+                                             class="form-control form-control-sm text-center" placeholder="Cari"
+                                             value="<?= $this->session->userdata('keyword') ?>">
                                         <div class="input-group-append">
-                                             <button class="btn btn-secondary btn-sm" type="submit">
+                                             <button class="btn btn-info btn-sm" type="submit">
                                                   <i class="fas fa-search"></i>
                                              </button>
-                                             <a href="#" class="btn btn-secondary btn-sm">
+                                             <a href="<?= base_url("index.php/product/reset") ?>"
+                                                  class="btn btn-info btn-sm">
                                                   <i class="fas fa-eraser"></i>
                                              </a>
                                         </div>
@@ -32,7 +34,7 @@
                                         <th scope="col">Produk</th>
                                         <th scope="col">Kategori</th>
                                         <th scope="col">Deskripsi</th>
-                                        <th scope="col">Status</th>
+                                        <!-- <th scope="col">Status</th> -->
                                         <th scope="col"></th>
                                    </tr>
                               </thead>
@@ -59,19 +61,20 @@
                                              <td>
                                                   <?= $row->description_product ?>
                                              </td>
+                                             <!-- <td>
+                                                  <?= $row->is_available ? 'Finish' : 'Draft' ?>
+                                             </td> -->
                                              <td>
-                                                  <?= $row->is_available ? 'Available' : 'Not Available' ?>
-                                             </td>
-                                             <td>
-                                                  <form action="#">
-                                                       <a href="#" class="">
-                                                            <button class="btn btn-sm">
-                                                                 <i class="fas fa-edit text-info"></i></button></a>
-                                                       <button class="btn btn-sm" type="submit"
-                                                            onclick="return confirm('Kamu akan menghapus pengguna?')">
-                                                            <i class="fas fa-trash text-danger"></i>
-                                                       </button>
-                                                  </form>
+                                                  <?= form_open(base_url("/index.php/product/delete/$row->id")) ?>
+                                                  <?= form_hidden('id', $row->id) ?>
+                                                  <a href="<?= base_url("/index.php/product/edit/$row->id") ?>" class="">
+                                                       <button class="btn btn-sm">
+                                                            <i class="fas fa-edit text-info"></i></button></a>
+                                                  <button class="btn btn-sm" type="submit"
+                                                       onclick="return confirm('Kamu akan menghapus pengguna?')">
+                                                       <i class="fas fa-trash text-danger"></i>
+                                                  </button>
+                                                  <?= form_close() ?>
                                              </td>
                                         </tr>
                                    <?php endforeach ?>

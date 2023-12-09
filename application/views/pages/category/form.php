@@ -12,7 +12,6 @@
                               <label for="">Kategori</label>
                               <?= form_input('title', $input->title, ['class' => 'form-control', 'id' => 'title', 'onkeyup' => 'createSlug()', 'required' => true, 'autofocus' => true]) ?>
                               <?= form_error('title') ?>
-                              <small class="form-text text-danger">Kategori harus diisi.</small>
                          </div>
                          <div class="form-group mb-3">
                               <label for="">Slug</label>

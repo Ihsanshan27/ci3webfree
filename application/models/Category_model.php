@@ -3,12 +3,14 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Category_model extends MY_Model {
+class Category_model extends MY_Model
+{
 
-     protected $perPage = 10;
+     protected $perPage = 5;
 
 
-     public function getDefaultValues() {
+     public function getDefaultValues()
+     {
           return [
                'id'    => '',
                'slug'  => '',
@@ -16,7 +18,8 @@ class Category_model extends MY_Model {
           ];
      }
 
-     public function getValidationRules() {
+     public function getValidationRules()
+     {
           $validationRules = [
                [
                     'field' => 'slug',

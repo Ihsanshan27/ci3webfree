@@ -82,8 +82,8 @@ class Product_model extends MY_Model
      }
      public function deleteImage($fileName)
      {
-          if (file_exists("./images/product/$fileName")) {
-               unlink("./images/product/$fileName");
+          if (file_exists("./index.php/images/product/$fileName")) {
+               unlink("./index.php/images/product/$fileName");
           }
      }
 }

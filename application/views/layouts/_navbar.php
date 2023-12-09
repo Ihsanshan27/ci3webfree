@@ -17,13 +17,13 @@
 					</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown-1">
 						<a href="<?= base_url('/index.php/category') ?>" class="dropdown-item">Kategori</a>
-						<a href="/admin-product.html" class="dropdown-item">Produk</a>
+						<a href="<?= base_url('/index.php/product') ?>" class="dropdown-item">Produk</a>
 						<a href="/admin-users.html" class="dropdown-item">Pengguna</a>
 					</div>
 				</li>
 			</ul>
 			<ul class="navbar-nav">
-				<?php if(!$this->session->userdata('is_login')): ?>
+				<?php if (!$this->session->userdata('is_login')): ?>
 					<li class="nav-item">
 						<a href="<?= base_url('/index.php/login') ?>" class="nav-link">Login</a>
 					</li>

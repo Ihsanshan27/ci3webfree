@@ -8,21 +8,20 @@ class Product extends MY_Controller
      public function __construct()
      {
           parent::__construct();
-          // $role = $this->session->userdata('role');
-          // if ($role != 'admin') {
-          //      redirect(base_url('/'));
-          //      return;
-          // }
+          $role = $this->session->userdata('role');
+          if ($role != 'admin' && 'member') {
+               redirect(base_url('/'));
+               return;
+          }
      }
 
 
      public function index($page = null)
      {
-          $data['title'] = 'Admin: Produk';
+          $data['title'] = 'Upload Your Art';
           $data['content'] = $this->product->select(
                [
                     'product.id', 'product.title AS product_title', 'product.image',
-                    'product.price', 'product.is_available',
                     'category.title AS category_title',
                     'product.description AS description_product',
                ]
@@ -32,9 +31,9 @@ class Product extends MY_Controller
                ->get();
           $data['total_rows'] = $this->product->count();
           $data['pagination'] = $this->product->makePagination(
-               base_url('index.php/product'), 2, $data['total_rows']
+               base_url('/index.php/product'), 2, $data['total_rows']
           );
-          $data['page'] = 'pages/product/index';
+          $data['page'] = '/pages/product/index';
 
           $this->view($data);
      }

@@ -18,7 +18,7 @@
 					<div class="dropdown-menu" aria-labelledby="dropdown-1">
 						<a href="<?= base_url('/index.php/category') ?>" class="dropdown-item">Kategori</a>
 						<a href="<?= base_url('/index.php/product') ?>" class="dropdown-item">Produk</a>
-						<a href="/admin-users.html" class="dropdown-item">Pengguna</a>
+						<a href="<?= base_url('/index.php/user') ?>" class="dropdown-item">Pengguna</a>
 					</div>
 				</li>
 			</ul>

@@ -54,7 +54,8 @@
                               <?= form_input('slug', $input->slug, ['class' => 'form-control', 'id' => 'slug', 'required' => true]) ?>
                               <?= form_error('slug') ?>
                          </div>
-                         <button type="submit" class="btn btn-primary">Simpan</button>
+                         <button type="submit" class="btn btn-primary mt-3">Simpan</button>
+                         <a href="<?= base_url("/index.php/product/reset") ?>" class="btn btn-primary mt-3">Cancel</a>
                          <?= form_close() ?>
                     </div>
                </div>

@@ -11,6 +11,12 @@ class Category extends MY_Controller
      {
           parent::__construct();
           //Do your magic here
+          $role = $this->session->userdata('role');
+          if ($role != 'admin') {
+               # code...
+               redirect(base_url('/'));
+               return;
+          }
      }
 
 

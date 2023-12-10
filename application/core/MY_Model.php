@@ -2,33 +2,37 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class MY_Model extends CI_Model {
+class MY_Model extends CI_Model
+{
 
      protected $table = '';
      protected $perPage = 5;
 
-
-     public function __construct() {
+     public function __construct()
+     {
           parent::__construct();
 
-          if(!$this->table) {
+          if (!$this->table) {
                $this->table = strtolower(
                     str_replace('_model', '', get_class($this))
                );
           }
      }
+
+
      /**
-      * Fungsi validasi input
-      * Rules: Dideklarasikan dalam masing masing model
+      * Fungsi Validasi Input
+      * Rules: Dideklarasikan dalam masing-masing model
+      *
       * @return void
       */
-
-     public function validate() {
+     public function validate()
+     {
           $this->load->library('form_validation');
+
           $this->form_validation->set_error_delimiters(
                '<small class="form-text text-danger">', '</small>'
           );
-
           $validationRules = $this->getValidationRules();
 
           $this->form_validation->set_rules($validationRules);
@@ -36,64 +40,157 @@ class MY_Model extends CI_Model {
           return $this->form_validation->run();
      }
 
-     public function select($columns) {
+
+     /**
+      * Seleksi data per-kolom
+      * Chain Method
+      *
+      * @param [type] $columns
+      * @return void
+      */
+     public function select($columns)
+     {
           $this->db->select($columns);
           return $this;
      }
 
-     public function where($column, $condition) {
+     /**
+      * Mencari suatu data pada kolom tertentu dengan data yang sama
+      * Chain Method
+      * @param [type] $column
+      * @param [type] $condition
+      * @return void
+      */
+     public function where($column, $condition)
+     {
           $this->db->where($column, $condition);
           return $this;
      }
 
-     public function like($column, $condition) {
+     /**
+      * Mencari suatu data pada kolom tertentu dengan data yang mirip
+      * Chain Method
+      * @param [type] $column
+      * @param [type] $condition
+      * @return void
+      */
+     public function like($column, $condition)
+     {
           $this->db->like($column, $condition);
           return $this;
      }
 
-     public function orLike($column, $condition) {
+     /**
+      * Mencari suatu data selanjutnya pada kolom tertentu dengan data yang mirip
+      * Chain Method
+      * @param [type] $column
+      * @param [type] $condition
+      * @return void
+      */
+     public function orLike($column, $condition)
+     {
           $this->db->or_like($column, $condition);
           return $this;
      }
 
-     public function join($table, $type = 'left') {
+     /**
+      * Menggabungkan Table yang berelasi yang memiliki foreign key id_namatable
+      * Chain Method
+      * @param [type] $table
+      * @param string $type
+      * @return void
+      */
+     public function join($table, $type = 'left')
+     {
           $this->db->join($table, "$this->table.id_$table = $table.id", $type);
           return $this;
      }
 
-
-     public function orderBy($column, $order = 'asc') {
+     /**
+      * Mengurutkan data dari hasil query dan kondisi
+      * Chain Method
+      * @param [type] $column
+      * @param string $order
+      * @return void
+      */
+     public function orderBy($column, $order = 'asc')
+     {
           $this->db->order_by($column, $order);
           return $this;
      }
 
-     public function first() {
+     /**
+      * Menampilkan satu data dari hasil query dan kondisi
+      * Hasil Akhir Chain Method
+      * @return void
+      */
+     public function first()
+     {
           return $this->db->get($this->table)->row();
      }
 
-     public function get() {
+     /**
+      * Menampilkan banyak data dari hasil query dan kondisi
+      * Hasil Akhir Chain Method
+      * @return void
+      */
+     public function get()
+     {
           return $this->db->get($this->table)->result();
      }
 
-     public function count() {
+     /**
+      * Menampilkan nilai jumlah data dari hasil query dan kondisi
+      * Hasil Akhir Chain Method
+      * @return void
+      */
+     public function count()
+     {
           return $this->db->count_all_results($this->table);
      }
 
-     public function create($data) {
+     /**
+      * Menyimpan data baru ke dalam suatu tabel
+      *
+      * @param [type] $data
+      * @return void
+      */
+     public function create($data)
+     {
           $this->db->insert($this->table, $data);
           return $this->db->insert_id();
      }
 
-     public function update($data) {
+     /**
+      * Mengubah data yang ada pada suatu tabel dengan data baru
+      *
+      * @param [type] $data
+      * @return void
+      */
+     public function update($data)
+     {
           return $this->db->update($this->table, $data);
      }
 
-     public function delete() {
+     /**
+      * Menghapus suatu data dari hasil query dan kondisi
+      * 
+      * @return void
+      */
+     public function delete()
+     {
           $this->db->delete($this->table);
           return $this->db->affected_rows();
      }
 
-     public function paginate($page) {
+     /**
+      * Menentukan Limit data untuk ditampilkan
+      *
+      * @param [type] $page
+      * @return void
+      */
+     public function paginate($page)
+     {
           $this->db->limit(
                $this->perPage,
                $this->calculateRealOffset($page)
@@ -102,8 +199,15 @@ class MY_Model extends CI_Model {
           return $this;
      }
 
-     public function calculateRealOffset($page) {
-          if(is_null($page) || empty($page)) {
+     /**
+      * Menggantikan offset dengan nilai sesuai halaman
+      *
+      * @param [type] $page
+      * @return void
+      */
+     public function calculateRealOffset($page)
+     {
+          if (is_null($page) || empty($page)) {
                $offset = 0;
           } else {
                $offset = ($page * $this->perPage) - $this->perPage;
@@ -112,11 +216,21 @@ class MY_Model extends CI_Model {
           return $offset;
      }
 
-     public function makePagination($baseUrl, $uriSegments, $totalRows = null) {
-          $this->load->library('Pagination');
+     /**
+      * Membuat Pagination dengan style bootstrap 4
+      *
+      * @param [type] $baseUrl
+      * @param [type] $uriSegment
+      * @param [type] $totalRows
+      * @return void
+      */
+     public function makePagination($baseUrl, $uriSegment, $totalRows = null)
+     {
+          $this->load->library('pagination');
+
           $config = [
                'base_url'         => $baseUrl,
-               'uri-segments'     => $uriSegments,
+               'uri_segment'      => $uriSegment,
                'per_page'         => $this->perPage,
                'total_rows'       => $totalRows,
                'use_page_numbers' => true,
@@ -133,10 +247,10 @@ class MY_Model extends CI_Model {
                'prev_tag_close'   => '</li>',
                'next_link'        => '&raquo',
                'next_tag_open'    => '<li class="page-item">',
-               'nexts_tag_close'  => '</li>',
+               'next_tag_close'   => '</li>',
                'last_tag_open'    => '<li class="page-item">',
                'last_tag_close'   => '</li>',
-               'cur_tag_open'     => '<li class="page-item active"><a href="#" class=""page_link>',
+               'cur_tag_open'     => '<li class="page-item active"><a href="#" class="page-link">',
                'cur_tag_close'    => '<span class="sr-only">(current)</span></a></li>',
                'num_tag_open'     => '<li class="page-item">',
                'num_tag_close'    => '</li>',
@@ -145,10 +259,6 @@ class MY_Model extends CI_Model {
           $this->pagination->initialize($config);
           return $this->pagination->create_links();
      }
-
-
 }
 
-/* End of file ModelName.php */
-
-?>
+/* End of file MY_Model.php */

@@ -2,31 +2,30 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Login extends MY_Controller {
+class Login extends MY_Controller
+{
 
-
-     public function __construct() {
+     public function __construct()
+     {
           parent::__construct();
-          //Do your magic here
           $is_login = $this->session->userdata('is_login');
 
-          if($is_login) {
-               # code...
+          if ($is_login) {
                redirect(base_url());
                return;
           }
      }
 
-     public function index() {
-          if(!$_POST) {
-               $input = (object)$this->login->getDefaultValues();
+     public function index()
+     {
+          if (!$_POST) {
+               $input = (object) $this->login->getDefaultValues();
           } else {
-               $input = (object)$this->input->post(null, true);
+               $input = (object) $this->input->post(null, true);
           }
 
-          if(!$this->login->validate()) {
-               # code...
-               $data['title'] = 'login';
+          if (!$this->login->validate()) {
+               $data['title'] = 'Login';
                $data['input'] = $input;
                $data['page'] = 'pages/auth/login';
 
@@ -34,18 +33,16 @@ class Login extends MY_Controller {
                return;
           }
 
-          if($this->login->run($input)) {
+          if ($this->login->run($input)) {
                $this->session->set_flashdata('success', 'Berhasil melakukan login!');
                redirect(base_url());
           } else {
-               $this->session->set_flashdata('error', 'Email atau password anda salah!');
-               redirect(base_url('/login'));
+               $this->session->set_flashdata('error', 'E-Mail atau Password salah atau akun Anda sedang tidak aktif!');
+               redirect(base_url('/index.php/login'));
           }
      }
 
 
 }
 
-/* End of Login.php */
-
-?>
+/* End of file Login.php */

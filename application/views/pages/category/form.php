@@ -19,6 +19,7 @@
                               <?= form_error('slug') ?>
                          </div>
                          <button type="submit" class="btn btn-primary">Simpan</button>
+                         <a href="<?= base_url("/index.php/category/reset") ?>" class="btn btn-primary">Cancel</a>
                          </form>
                          <?= form_close() ?>
                     </div>

@@ -10,9 +10,11 @@ class Profile_model extends MY_Model
      public function getDefaultValues()
      {
           return [
-               'name'  => '',
-               'email' => '',
-               'image' => '',
+               'name'        => '',
+               'email'       => '',
+               'image'       => '',
+               'description' => '',
+               'sosmed_ig'   => '',
           ];
      }
 
@@ -29,6 +31,11 @@ class Profile_model extends MY_Model
                     'label' => 'Email',
                     'rules' => 'trim|required|valid_email|callback_unique_email',
                ],
+               // [
+               //      'field' => 'description',
+               //      'label' => 'Deskripsi',
+               //      'rules' => 'trim|required'
+               // ],
           ];
 
           return $validationRules;

@@ -9,7 +9,7 @@ class Product extends MY_Controller
      {
           parent::__construct();
           $role = $this->session->userdata('role');
-          if ($role != 'admin' && 'member') {
+          if ($role != 'admin') {
                redirect(base_url('/'));
                return;
           }
@@ -26,6 +26,7 @@ class Product extends MY_Controller
                     'product.description AS description_product',
                ]
           )
+          // ->where('id', $this->id)->first()
                ->join('category')
                ->paginate($page)
                ->get();

@@ -37,7 +37,7 @@
 							<?= $this->session->userdata('name') ?>
 						</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown-2">
-							<a href="/profile.html" class="dropdown-item">Profile</a>
+							<a href="<?= base_url('/index.php/profile') ?>" class="dropdown-item">Profile</a>
 							<a href="<?= base_url('/index.php/logout') ?>" class="dropdown-item">Logout</a>
 						</div>
 					</li>

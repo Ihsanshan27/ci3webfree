@@ -31,14 +31,17 @@
                          <div class="card mb-3">
                               <div class="card-body">
                                    <h5 class="card-title">
+                                        Judul :
                                         <?= $detail->title ?>
                                    </h5>
                                    <!-- <p class="card-text"><strong>YOUR NAME</strong></p> -->
                                    <p class="card-text">
+                                        Deskripsi :
                                         <?= $detail->description ?>
                                    </p>
                                    <?php foreach ($detail_product as $row): ?>
                                         <a href="#"><span class="badge bg-primary"><i class="fa-solid fa-tag"></i>
+                                                  Tag :
                                                   <?= $row->category_title ?>
                                              </span></a>
                                    <?php endforeach ?>

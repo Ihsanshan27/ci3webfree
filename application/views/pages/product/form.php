@@ -3,13 +3,13 @@
           <div class="col-md-10 mx-auto">
                <div class="card mb-3">
                     <div class="card-header">
-                         <span>Formulir Produk</span>
+                         <span>Upload New Post</span>
                     </div>
                     <div class="card-body">
                          <?= form_open_multipart($form_action, ['method' => 'POST']) ?>
                          <?= isset($input->id) ? form_hidden('id', $input->id) : '' ?>
                          <div class="form-group">
-                              <label for="">Produk</label>
+                              <label for="">New Post</label>
                               <?= form_input('title', $input->title, ['class' => 'form-control', 'id' => 'title', 'onkeyup' => 'createSlug()', 'required' => true, 'autofocus' => true]) ?>
                               <?= form_error('title') ?>
                          </div>

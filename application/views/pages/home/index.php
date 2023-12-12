@@ -5,7 +5,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="card mb-3">
-						<div class="card-body">
+						<div class="card-body ">
 							Kategori: <strong>
 								<?= isset($category) ? $category : 'Semua Kategori' ?>
 							</strong>
@@ -53,7 +53,8 @@
 								</div>
 							 </form> -->
 								<div class="d-grid gap-2">
-									<a href="/detail-product.html" class="btn btn-primary">Lihat detail
+									<a href="<?= base_url("index.php/detailproduct/index/$row->id_product") ?>"
+										class="btn btn-primary">Lihat detail
 										postingan</a>
 									<!-- <button
 								    class="btn btn-primary"
@@ -113,11 +114,13 @@
 				<div class="col-md-12">
 					<div class="card mb-3">
 						<div class="card-header">Kategori</div>
-						<ul class="list-group list-group-flush">
-							<li class="list-group-item"><a href="<?= base_url('/') ?>">Semua Kategori</a></li>
+						<ul class="list-group list-group-flush ">
+							<li class="list-group-item "><a href="<?= base_url('/') ?>"
+									class="btn btn-primary">Semua Kategori</a></li>
 							<?php foreach (getCategories() as $category): ?>
 								<li class="list-group-item">
-									<a href="<?= base_url("/index.php/shop/category/$category->slug") ?>">
+									<a href="<?= base_url("/index.php/shop/category/$category->slug") ?>"
+										class="btn btn-primary">
 										<?= $category->title ?>
 									</a>
 								</li>

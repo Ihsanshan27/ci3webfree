@@ -51,7 +51,7 @@
                                                   <?= $row->slug ?>
                                              </td>
                                              <td>
-                                                  <?= form_open("/index.php/category/delete/$row->id", ['method' => 'POST']) ?>
+                                                  <?= form_open("/category/delete/$row->id", ['method' => 'POST']) ?>
                                                   <?= form_hidden('id', $row->id) ?>
                                                   <a href="<?= base_url("/index.php/category/edit/$row->id") ?>"
                                                        class="btn btn-sm"">
